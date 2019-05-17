@@ -1,23 +1,38 @@
 #!/bin/bash
+rip_target="/content/Processing"
 
-mount /dev/sr0 /mnt
+echo "Mounting to determine title"
 
-sleep 5
+mkdir -p /mnt/sr0
+mount /dev/sr0 /mnt/sr0
 
-title="$(xpath -q -e '/disclib/di:discinfo/di:title/di:name/text()' /mnt/BDMV/META/DL/bdmt_eng.xml)"
-title=${title/' - Blu-ray™'/''}
-title=${title/' - Blu-ray'/''}
+sleep 1
 
-echo "Disc title is: $title"
+if [ -f "/mnt/sr0/BDMV/META/DL/bdmt_eng.xml" ]; then
 
-umount /dev/sr0
+	title="$(xpath -q -e '/disclib/di:discinfo/di:title/di:name/text()' /mnt/sr0/BDMV/META/DL/bdmt_eng.xml)"
+	title=${title/'™'/''}
+	title=${title/' - Blu-ray'/''}
+	title="${title// /_}"
+	
+	tar czf "/tmp/$title.tar.gz" -C /mnt/sr0/BDMV/META/DL .
 
-if [ -n "$title" ]; then
-    rip_path="/content/$title"
-    mkdir -p rip_path
-    echo "Path is: $rip_path"
-    
-    makemkvcon --minlength=3600 -r --decrypt --directio=true mkv disc:0 all $rip_path
+	echo "Disc title is: $title"
+
+	umount /dev/sr0
+
+	if [ -n "$title" ]; then
+	    rip_path="$rip_target/$title"
+	    mkdir -p $rip_path
+	    echo "Path is: $rip_path"
+			
+			if [ -f "/tmp/$title.tar.gz" ]; then
+				cp --no-preserve=mode,ownership "/tmp/$title.tar.gz" "$rip_path/meta.tar.gz"
+				rm "/tmp/$title.tar.gz"
+			fi
+			
+	    makemkvcon --minlength=3600 -r --decrypt --directio=true mkv disc:0 all $rip_path
+	fi
 fi
 
-eject
+#eject
