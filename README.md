@@ -8,7 +8,7 @@ sudo apt-get install git
 sudo add-apt-repository ppa:heyarje/makemkv-beta
 
 sudo apt update
-sudo apt install xpath makemkv-bin makemkv-oss 
+sudo apt install xpath makemkv-bin makemkv-oss ffmpeg
 ```
 
 **Install fartrippr**
