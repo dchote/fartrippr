@@ -13,6 +13,7 @@ if [ -f "/mnt/sr0/BDMV/META/DL/bdmt_eng.xml" ]; then
   title="$(xpath -q -e '/disclib/di:discinfo/di:title/di:name/text()' /mnt/sr0/BDMV/META/DL/bdmt_eng.xml)"
   title=${title/'™'/''}
   title=${title/' - Blu-ray'/''}
+  title=${title/' - 4K Ultra HD'/''}
   title="${title// /_}"
 
   tar czf "/tmp/$title.tar.gz" -C /mnt/sr0/BDMV/META/DL .
