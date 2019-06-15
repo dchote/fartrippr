@@ -17,9 +17,3 @@ cd /opt
 sudo git clone https://github.com/dchote/fartrippr.git
 cd fartrippr
 ```
-
-
-**Automation**
-```bash
-sudo ln -s /opt/fartrippr/automation/51-automedia.rules /lib/udev/rules.d/
-```
