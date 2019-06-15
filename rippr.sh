@@ -37,7 +37,7 @@ if [ -n "$title" ]; then
 
   makemkvcon --minlength=3600 -r --decrypt --directio=true mkv disc:0 all $rip_path
 else
-  echo "\n** No title **\n\n"
+  echo "** No title Found **"
 fi
 
 
