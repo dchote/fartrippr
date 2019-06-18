@@ -21,6 +21,10 @@ if [ -f "/mnt/sr0/BDMV/META/DL/bdmt_eng.xml" ]; then
   echo "Disc title via META is: $title"
 else
   title="$(blkid -o value -s LABEL /dev/sr0)"
+  
+  if [ title == "LOGICAL_VOLUME_ID" ]; then
+    title="$(blkid -p -o value -s VOLUME_ID /dev/sr0)"
+  fi
 fi
 
 umount /dev/sr0
