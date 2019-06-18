@@ -19,7 +19,9 @@ if [ -f "/mnt/sr0/BDMV/META/DL/bdmt_eng.xml" ]; then
   tar czf "/tmp/$title.tar.gz" -C /mnt/sr0/BDMV/META/DL .
 
   echo "Disc title via META is: $title"
-else
+fi
+
+if [ -n "$title" ]; then
   title="$(blkid -o value -s LABEL /dev/sr0)"
   
   if [ "$title" == "LOGICAL_VOLUME_ID" ]; then
