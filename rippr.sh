@@ -33,7 +33,7 @@ fi
 
 umount /dev/sr0
 
-if [ -n "$title" ||  -z "$title"  ]; then
+if [ -n "$title" ]; then
   rip_path="$rip_target/$title"
   mkdir -p $rip_path
   echo "Output path is: $rip_path"
