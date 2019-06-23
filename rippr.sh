@@ -10,15 +10,21 @@ sleep 1
 
 if [ -f "/mnt/sr0/BDMV/META/DL/bdmt_eng.xml" ]; then
   title="$(xpath -q -e '/disclib/di:discinfo/di:title/di:name/text()' /mnt/sr0/BDMV/META/DL/bdmt_eng.xml)"
-  title=${title/'™'/''}
-  title=${title/' - Blu-ray'/''}
-  title=${title/' – Blu-ray'/''}
-  title=${title/' - 4K Ultra HD'/''}
-  title="${title// /_}"
+  size=${#$title}
 
-  tar czf "/tmp/$title.tar.gz" -C /mnt/sr0/BDMV/META/DL .
-
-  echo "Disc title via META is: $title"
+  if [ "$size" -gt "3" ]; then
+    title=${title/'™'/''}
+    title=${title/' - Blu-ray'/''}
+    title=${title/' – Blu-ray'/''}
+    title=${title/' - 4K Ultra HD'/''}
+    title="${title// /_}"
+    
+    tar czf "/tmp/$title.tar.gz" -C /mnt/sr0/BDMV/META/DL .
+    echo "Disc title via META is: $title"
+  else
+    unset title
+  fi
+  
 fi
 
 if [ ! "$title" ]; then
