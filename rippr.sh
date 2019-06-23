@@ -24,10 +24,13 @@ fi
 if [ ! "$title" ]; then
   title="$(blkid -o value -s LABEL /dev/sr0)"
   
-  echo "Disc title via LABEL: $title"
-  if [ "$title" == "LOGICAL_VOLUME_ID" ]; then
-    title="$(blkid -p -o value -s VOLUME_ID /dev/sr0)"
-    echo "Disc title via LOGICAL_VOLUME_ID: $title"
+  if [ -n "$title" ]; then
+    echo "Disc title via LABEL: $title"
+    
+    if [ "$title" == "LOGICAL_VOLUME_ID" ]; then
+      title="$(blkid -p -o value -s VOLUME_ID /dev/sr0)"
+      echo "Disc title via LOGICAL_VOLUME_ID: $title"
+    fi
   fi
 fi
 
