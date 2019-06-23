@@ -10,7 +10,7 @@ sleep 1
 
 if [ -f "/mnt/sr0/BDMV/META/DL/bdmt_eng.xml" ]; then
   title="$(xpath -q -e '/disclib/di:discinfo/di:title/di:name/text()' /mnt/sr0/BDMV/META/DL/bdmt_eng.xml)"
-  size=${#$title}
+  size=${#title}
 
   if [ "$size" -gt "3" ]; then
     title=${title/'™'/''}
