@@ -24,14 +24,16 @@ fi
 if [ -n "$title" ]; then
   title="$(blkid -o value -s LABEL /dev/sr0)"
   
+  echo "Disc title via LABEL: $title"
   if [ "$title" == "LOGICAL_VOLUME_ID" ]; then
     title="$(blkid -p -o value -s VOLUME_ID /dev/sr0)"
+    echo "Disc title via LOGICAL_VOLUME_ID: $title"
   fi
 fi
 
 umount /dev/sr0
 
-if [ -n "$title" ]; then
+if [ -n "$title" ||  -z "$title"  ]; then
   rip_path="$rip_target/$title"
   mkdir -p $rip_path
   echo "Output path is: $rip_path"
