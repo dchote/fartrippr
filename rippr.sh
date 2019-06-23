@@ -21,7 +21,7 @@ if [ -f "/mnt/sr0/BDMV/META/DL/bdmt_eng.xml" ]; then
   echo "Disc title via META is: $title"
 fi
 
-if [ -n "$title" ]; then
+if [ ! "$title" ]; then
   title="$(blkid -o value -s LABEL /dev/sr0)"
   
   echo "Disc title via LABEL: $title"
