@@ -54,7 +54,7 @@ if [ -n "$title" ]; then
     rm "/tmp/$title.tar.gz"
   fi
 
-  makemkvcon --minlength=3600 -r --decrypt --directio=true mkv disc:0 all $rip_path
+  makemkvcon --minlength=2800 -r --decrypt --directio=true mkv disc:0 all $rip_path
 else
   echo "** No title Found **"
 fi
