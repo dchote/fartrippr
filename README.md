@@ -4,11 +4,10 @@ quick and simple scripts to automate media backup. If you want an all-in-one pro
 **Set up repos and install packages**
 
 ```bash
-sudo apt-get install git default-jre
 sudo add-apt-repository ppa:heyarje/makemkv-beta
 
 sudo apt update
-sudo apt install xpath makemkv-bin makemkv-oss ffmpeg
+sudo apt install git xpath default-jre makemkv-bin makemkv-oss ffmpeg
 ```
 
 **Install fartrippr**
