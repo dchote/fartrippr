@@ -19,7 +19,7 @@ outputFile="$inputFilename.mp4"
 #
 # determine which encoder to use by the contentHeight
 #
-contentHeight="$(ffprobe -v quiet -print_format xml -show_format -show_streams "$inputFile" | xpath -q -e '/ffprobe/streams/stream/@height')"
+contentHeight="$(ffprobe -v quiet -print_format xml -show_format -show_streams "$inputFile" | xpath -q -e '/ffprobe/streams/stream/@height' | head -n 1)"
 
 if [ "$contentHeight" == ' height="1080"' ]; then
   echo "1080p content"
