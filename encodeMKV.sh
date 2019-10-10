@@ -21,7 +21,7 @@ outputFile="$inputFilename.mp4"
 #
 contentHeight="$(ffprobe -v quiet -print_format xml -show_format -show_streams "$inputFile" | xpath -q -e '/ffprobe/streams/stream/@height' | head -n 1)"
 
-if [ "$contentHeight" == ' height="1080"' ]; then
+if [[ "$contentHeight" == *"1080"* ]]; then
   echo "1080p content"
   
   #
