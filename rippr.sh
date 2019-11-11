@@ -18,6 +18,7 @@ if [ -f "/mnt/sr0/BDMV/META/DL/bdmt_eng.xml" ]; then
     title=${title/' – Blu-ray'/''}
     title=${title/' - 4K Ultra HD'/''}
     title="${title// /_}"
+    title="${title/$'\n'/_}"
     
     tar czf "/tmp/$title.tar.gz" -C /mnt/sr0/BDMV/META/DL .
     echo "Disc title via META is: $title"
